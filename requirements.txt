@@ -4,4 +4,4 @@ scikit-learn
 selenium
 bs4
 requests
-
+lxml
