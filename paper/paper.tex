@@ -67,7 +67,7 @@ In this work, we present a novel, semiautonomous methodology for analyzing syndi
 
 
 % keywords can be removed
-\keywords{Viral news \and News propagation \and News Syndication}
+\keywords{Fake news \and News propagation \and News syndication}
 
 
 \section{Introduction}
@@ -86,13 +86,24 @@ A different variation of fake news is syndication. A website can take a real new
 
 One can try and detect fake news by checking the source of the story, read beyond the title (which is intended to attract users and thus contains more interesting and controversial topics), try to trace the article back to the original source, or even make sure the article is not a satire by any chance.
 Even though it's possible, doing so is not an easy task, and that is why there has been a lot of work put into automating this process. A step towards this, is detecting and analyzing the syndication of viral news stories. That is, how stories change through time and the difference between articles regrading the same stories but posted in different websites.
+
 \section{Background}
-The topic of misinformation and fake news has been widely researched and studied ever since the Russian misinformation campaign that was launched against the Uni
+The field of misinformation and fake news has become widely researched by academics ever since the Russian misinformation campaign against the 2016 United States presidential election came to light\cite{stelzenmuller2017impact}. The most straightforward approach to detecting fake news is applying various machine learning techniques, and this is what many researchers have focused on thus far.
+
+\subsection{Fake News Detection}Shu et al. goes through a comprehensive overview of all of the various ways of attacking the problem of fake news detection and classification from a data mining perspective \cite{shu2017fake}. From the perspective of detecting fake news via machine learning techniques, Shu et al. outlines that there are generally four different types of features that can be used to detect fake news: news content features, linguistic-based features, visual-based features, and social context features. These features are then applied to one of two different types of models: news content models, or social context models . Just as they sound, news content models focus on fact checking claims in the news article or looking at stylistic features that may indicate that the article is fake. Social context models, on the other hand, focus on how users interact with the article, the virality of the article, and the propagation path of the news story. These two different methods are rarely used independently, but rather compliment each other in many hybrid approaches, such as ensemble models \cite{shu2017fake}. 
+
+\subsection{Open Issues in Fake News Detection}
+Shu et al. closes by giving an overview of many of the various open areas of research in this field, as well as proposing some future research ideas. Shu et al. outlines four future research directions: data-oriented, feature-oriented, model-oriented, and application-oriented. Within the area of data-oriented research, Shu et al. brings forward a couple of issues that need to be addressed. For one, there is no large, encompassing fake news data set which can be used as a benchmark to facilitate future research \cite{shu2017fake}. In fact, this was such a large problem that in 2018, Shu et al. published another work detailing their methodology for building a large scale, open source, data set consisting of fake news, which is now available on Github \cite{shu2018fakenewsnet}. Another idea that Shu et al. proposes for future research within the data-oriented direction is early fake news detection \cite{shu2017fake}. Many of the current state-of-the-art fake news detection methods rely on data that needs to be accumulated over time and information that is not readily available when news is just starting to go viral \cite{liu2018early}. Shu et al. suggests creating a system that provides fake news alerts during the dissemination process so that misinformation can be flagged before it is viewed by a large audience. Another suggestion that is made is to look at social media posts made within some time delay of the original posts as a means of verifying the veracity of the post \cite{shu2017fake}.  
 %\label{sec:headings}
 
 
 \section{Related Work}
-\cite{zannettou2018origins}
+There has been work done on early fake news detection by analyzing propagation paths and time series. Most of this work, however, has been limited in scope in terms of the domains that it covers, as well as the type of media being analyzed. For example, past research has focused on a either a few social media platforms, or a specific media outlet \cite{liu2018early},\cite{jin2014news}. The research that has spanned across multiple different domains of news (social media, various news outlets, etc.) has been limited in scope when considering the type of media that is being analyzed \cite{zannettou2018origins}.
+
+\subsection{Domain-Specific Approaches}
+
+\subsection{Media-Specific Approaches}
+
 
 \section{Methodology}
 \subsection{Phase 1 - Manual Inspection}
@@ -111,72 +122,14 @@ Once we found the original news source, we looked at how the article title and c
 
 \section{Contributions}
 
+\section{Findings}
+
 \section{Future Work}
 
 \section{Conclusion}
 
-%\label{sec:others}
-%\lipsum[8] \cite{kour2014real,kour2014fast} and see \cite{hadash2018estimate}.
 
-%The documentation for \verb+natbib+ may be found at
-%\begin{center}
-%  \url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-%\end{center}
-%Of note is the command \verb+\citet+, which produces citations
-%appropriate for use in inline text.  For example,
-%\begin{verbatim}
-%   \citet{hasselmo} investigated\dots
-%\end{verbatim}
-%produces
-%\begin{quote}
-%  Hasselmo, et al.\ (1995) investigated\dots
-%\end{quote}
-
-%\begin{center}
-%  \url{https://www.ctan.org/pkg/booktabs}
-%\end{center}
-
-
-%\subsection{Figures}
-%\lipsum[10] 
-%See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-%\lipsum[11] 
-
-%\begin{figure}
- % \centering
- % \fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
- % \caption{Sample figure caption.}
-  %\label{fig:fig1}
-%\end{figure}
-
-%\subsection{Tables}
-%\lipsum[12]
-%See awesome Table~\ref{tab:table}.
-
-%\begin{table}
- %\caption{Sample table title}
-  %\centering
-  %\begin{tabular}{lll}
-    %\toprule
-   % \multicolumn{2}{c}{Part}                   \\
-    %\cmidrule(r){1-2}
-   % Name     & Description     & Size ($\mu$m) \\
-   % \midrule
-   % Dendrite & Input terminal  & $\sim$100     \\
-   % Axon     & Output terminal & $\sim$10      \\
-    %Soma     & Cell body       & up to $10^6$  \\
-    %\bottomrule
-  %\end{tabular}
-  %\label{tab:table}
-%\end{table}
-
-%\subsection{Lists}
-%\begin{itemize}
-%\item Lorem ipsum dolor sit amet
-%\item consectetur adipiscing elit. 
-%\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
-%\end{itemize}
-
+\newpage
 
 \bibliographystyle{unsrt}  
 \bibliography{paper}  %%% Remove comment to use the external .bib file (using bibtex).
