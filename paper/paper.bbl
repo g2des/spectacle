@@ -1,5 +1,36 @@
 \begin{thebibliography}{1}
 
+\bibitem{stelzenmuller2017impact}
+Constanze Stelzenm{\"u}ller.
+\newblock The impact of russian interference on germany’s 2017 elections.
+\newblock {\em Testimony before the US Senate Select Committee on Intelligence
+  June}, 28, 2017.
+
+\bibitem{shu2017fake}
+Kai Shu, Amy Sliva, Suhang Wang, Jiliang Tang, and Huan Liu.
+\newblock Fake news detection on social media: A data mining perspective.
+\newblock {\em ACM SIGKDD Explorations Newsletter}, 19(1):22--36, 2017.
+
+\bibitem{shu2018fakenewsnet}
+Kai Shu, Deepak Mahudeswaran, Suhang Wang, Dongwon Lee, and Huan Liu.
+\newblock Fakenewsnet: A data repository with news content, social context and
+  dynamic information for studying fake news on social media.
+\newblock {\em arXiv preprint arXiv:1809.01286}, 2018.
+
+\bibitem{liu2018early}
+Yang Liu and Yi-Fang~Brook Wu.
+\newblock Early detection of fake news on social media through propagation path
+  classification with recurrent and convolutional networks.
+\newblock In {\em Thirty-Second AAAI Conference on Artificial Intelligence},
+  2018.
+
+\bibitem{jin2014news}
+Zhiwei Jin, Juan Cao, Yu-Gang Jiang, and Yongdong Zhang.
+\newblock News credibility evaluation on microblog with a hierarchical
+  propagation model.
+\newblock In {\em 2014 IEEE International Conference on Data Mining}, pages
+  230--239. IEEE, 2014.
+
 \bibitem{zannettou2018origins}
 Savvas Zannettou, Tristan Caulfield, Jeremy Blackburn, Emiliano De~Cristofaro,
   Michael Sirivianos, Gianluca Stringhini, and Guillermo Suarez-Tangil.
