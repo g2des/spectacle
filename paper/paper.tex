@@ -194,12 +194,18 @@ The approach can be broadly categorized into two stages.
 \end{enumerate}
 
 \subsection{Dataset Creation}
+The one of the key part of phase II is to generate a large enough dataset for analysis. As a part of this stage we identify news articles, that can potentially be called viral news stories. Based on these news articles we build a larger dataset comprising of all other relevant articles, metadata about these articles and the response these stories recieved on platforms like reddit and facebook. 
+
 \subsubsection{Identification of Viral News Article}
-Like in phase I, we did not use articles published by unbiased media sources and steered clear of stories related to Donald Trump. An article with more than \emph{ten thousand reactions}\footnote{reaction is the sum of likes, comments and shares} on facebook was quantified as a viral news article. The articles selected in the end were a heterogenous mixture of local and international events. These new articles were used to manually build\emph{url.csv} dataset. This dataset consists of a single feature, url pointing to the article.
+As in phase I, we did not use articles published by unbiased media sources and steered clear of stories related to Donald Trump. An article with more than \emph{ten thousand reactions}\footnote{reaction is the sum of likes, comments and shares} on facebook was quantified as a viral news article. The articles selected in the end were a heterogenous mixture of local and international events. These new articles were used to manually build\emph{url.csv} dataset. This dataset consists of a single feature, url pointing to the article.
+
+This list of urls is used to generate an intermediate dataset which consists of features like title, description and content of the articles. For extracting contents of the web pages, we use \emph{embed.ly}. It provides \emph{/1/extract/} API which can be used to retrieve article text, title, and other meta-data. This raw data is processed to remove html tags and html symbols.
 
 \subsubsection{Scraping similar news articles}
-Once a url.csv is generated, remanining articles are fetched manually of the internet. Currently, we use google news api and newsapi to query for the relevant articles.
-The urls in \emph{url.csv} were used to generate a temporary dataset which consists of the url of the story along with the title of the story. The title is  
+To correctly identify the origin of a particular article, or to see the propagation path for an article, it is crucial to extract all the relevant articles of the web. In phase II, we used various APIs news aggregators like google news, NEWSAPI to identify more articles on the relevant news topic.To generate better results, the \emph{stop words} are removed.
+
+\paragraph*{Stop Words}
+Words that do not provide any discriminative power are referred to as stop words\cite{saif2014stopwords}. We used the classic method to remove the stop words. In this method, any word present in a precompiled list is removed from the text. We used Standford NLP's list of stop word\cite{stanfordnlp2019Dec}. 
 
 \subsubsection{Building Dataset}
 \colorbox{BurntOrange}{Add code snippet here}
