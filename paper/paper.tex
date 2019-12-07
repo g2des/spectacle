@@ -12,7 +12,11 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{lipsum}
-
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{wrapfig}
 \title{A Systematic Approach to Analyzing Syndication of Viral News Stories}
 
 
@@ -59,15 +63,23 @@
 \begin{document}
 \maketitle
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=6.5cm]{paper/img/university.png}
+\end{figure}
+
 \begin{abstract}
-In this work, we present a novel, semiautonomous methodology for analyzing syndicated news articles. We first detail our manual process of news syndication analysis from which we observe a number of unsettling patterns. From there, we go on to categorize and define two different forms of syndication: top-down and bottom-up. We then transform our manual process into a semiautomated one which combines web scraping and machine learning techniques to create and then analyze a dataset of viral news stories. From the analysis, we are able to make some inferences about the nature of syndicated news articles, as well as trace back a viral news story to its original publisher and article. By presenting this work, we hope to minimize the effects that blind news syndication has on the spread of misinformation. 
-
-
+In this work, we present a novel, semiautonomous methodology for analyzing syndicated news articles. We first detail our manual process of news syndication analysis from which we observe a number of unsettling patterns. From there, we go on to categorize and define two different forms of syndication: top-down and bottom-up. We then transform our manual process into a semiautomated one which combines web scraping and machine learning techniques to create and then analyze a data set of viral news stories. From the analysis, we are able to make some inferences about the nature of syndicated news articles, as well as trace back a viral news story to its original publisher and article. By presenting this work, we hope to minimize the effects that blind news syndication has on the spread of misinformation. 
 \end{abstract}
-
-
-% keywords can be removed
 \keywords{Fake news \and News propagation \and News syndication}
+\newpage
+
+\tableofcontents
+
+\newpage
+% keywords can be removed
+
+
 
 
 \section{Introduction}
@@ -87,6 +99,8 @@ A different variation of fake news is syndication. A website can take a real new
 One can try and detect fake news by checking the source of the story, read beyond the title (which is intended to attract users and thus contains more interesting and controversial topics), try to trace the article back to the original source, or even make sure the article is not a satire by any chance.
 Even though it's possible, doing so is not an easy task, and that is why there has been a lot of work put into automating this process. A step towards this, is detecting and analyzing the syndication of viral news stories. That is, how stories change through time and the difference between articles regrading the same stories but posted in different websites.
 
+The thing is, that identifying news propagation path is tedious, too. To identify the propagation path of a given article, one would have to dive deep into the results of Google search, manually identify the original source of the story, and look through many news websites and see the differences between the ways each website covers the same story. That's why we decided to try and automate this process using machine learning techniques and data analysis.
+
 \section{Background}
 The field of misinformation and fake news has become widely researched by academics ever since the Russian misinformation campaign against the 2016 United States presidential election came to light\cite{stelzenmuller2017impact}. The most straightforward approach to detecting fake news is applying various machine learning techniques, and this is what many researchers have focused on thus far.
 
@@ -98,48 +112,247 @@ Shu et al. closes by giving an overview of many of the various open areas of res
 
 
 \section{Related Work}
-There has been work done on early fake news detection by analyzing propagation paths and time series, as well as analyzing the dynamics of news syndication. Most of this work, however, has been limited in scope in terms of the domains that it covers, as well as the type of media being analyzed. For example, past research has focused on a either a few social media platforms, a specific media outlet, or a single country \cite{liu2018early},\cite{jin2014news}, \cite{wang2009propagation}. The research that has spanned across multiple different domains of news (social media, various news outlets, etc.) has been limited in scope when considering the type of media that is being analyzed \cite{zannettou2018origins}. There has been little if any work done specifically on the syndication of viral news and trying to automatically analyze and track back a viral news story to its original publisher. The vast number of works on syndication mostly focus on content syndication from a marketing perspective.   
+There has been work done on early fake news detection by analyzing propagation paths and time series, as well as analyzing the dynamics of news syndication. Most of this work, however, has been limited in scope in terms of the domains that it covers, as well as the type of media being analyzed. For example, past research has focused on a either a few social media platforms, a specific media outlet, or a single country \cite{liu2018early},\cite{jin2014news}, \cite{wang2009propagation}. The research that has spanned across multiple different domains of news (social media, various news outlets, etc.) has been limited in scope when considering the type of media that is being analyzed \cite{zannettou2018origins}. There has been little work, if any, done specifically on the syndication of viral news and trying to automatically analyze and track back a viral news story to its original publisher.   
 
 \subsection{Domain-Specific Approaches}
+Liu et al. propose a method of early fake news detection by modeling the propagation paths as a multivariate time series. They build a classifier that uses recurrent and convolutional networks to detect fake news. They were able to achieve an accuracy of 85\% on Twitter and an accuracy of 92\% on Sina Weibo when it came to correctly classifying fake news. Liu et al. claims that they were able to detect the misinformation five minutes after it began to spread \cite{liu2018early}. The downside to this approach is that it relies on user interaction with the article to generate the data needed to feed into their classifier. This means that some users will be exposed to the fake news before it can be flagged as misinformation just due to the nature of the data set that they are using. Also, this approach has only been tested on social media platforms and micro blogs, meaning that this methodology cannot be applied on a global scale that spans hundreds of different news outlets and social media sites.
+
+Jin et al., in their work, tackle the problem of misinformation on the popular website Micro blog. They propose a three-layer hierarchical model that establishes a credibility score for each post and then propagates this score throughout the network. They then formulate this propagation process as a graph optimization problem and find a globally optimal solution. Jin et al. were able to boost accuracy by 6\% over the baseline model \cite{jin2014news}. Again, just like Liu et al.'s approach, Jin et al. focus solely on one website: Micro blog. Their model is reliant on data to be taken specifically from Micro blog. Although their technique could in theory be applied to other platforms, their approach is mostly domain-specific and does not analyze misinformation on a global scale. 
+
+Wang et al. explore and analyze the patterns of news propagation and syndication in Chinese news media. They draw comparisons between the way news diffuses through time and space and how an epidemic spreads. Something interesting that they found was that 80\% of news outlets were responsible for re-printing news articles directly from the source \cite{wang2009propagation}. Some of our findings also substantiate this claim. Like much of the other research on this topic, Wang et al. focused on only Chinese media outlets and they also did not attempt to trace back an article back to its original source without knowing what that source was in the first place. Although Wang et al.'s research brings to light some interesting patterns in the ways that news article propagate and are syndicated, the work is confined mostly to Chinese news media, which is known to be heavily regulated by the Chinese Communist Party \cite{tai2014china}.  
+
 
 \subsection{Media-Specific Approaches}
-
-\subsection{Content Syndication in Marketing}
-
-
-\section{Methodology}
-\subsection{Phase 1 - Manual Inspection}
-
-To begin the process of analyzing syndication, we started off by manually gathering articles and seeing the propagation path of those articles. We tried to look for a pattern in the way articles change throughout time. This phase included x steps.
-
-\subsubsection{Article Search}
-To begin the manual inspection. We started looking through the internet for articles that gained a lot of traffic relative to other articles in the same website. We looked for a high number of shares or comments. Some of the news sites we looked at are "Daily Mail", "The Washington Post" and "Daily Caller".
-\subsubsection{Original Source Search}
-After we filtered out some articles due to content and popularity, we tried tracing the articles back to their original source. We google key words from the article, and that way we essentially got a list of different websites' articles of that news story. We paid close attention to the dates, to try and find the earliest article regrading said news story. 
-\subsubsection{Propagation path}
-Once we found the original news source, we looked at how the article title and content change over time and throughout different news sources. We tried to see how the website's beliefs changed the way the story was described in each and every news site, that is, how news got syndicated.
+Zannettou et al. take a different approach to analyzing propagation; instead of looking at social media posts or news stories, they focus on politically motivated memes. Unlike any of the previous research talked about, Zannettou et al. pool data from a number of various sources: Twitter, Reddit, 4chan, and Gab. Using memes from these sites, they are able to trace the propagation path of each meme and even draw conclusions about the influence that each meme outlet has. Zannettou et al. use Hawkes process to model how memes from various sources interact with each other and quantify the influence that each meme has on others \cite{zannettou2018origins}. Although this research encompasses many different media outlets and social media platforms, it fails to analyze any other form of media besides memes. Some of the processes outlined in this work could be applied to news articles, but much of it is very specific to memes and images and cannot be generalized to news articles due to the difference in data between an image and a set of text. Nevertheless, Zannettou et al. showed that memes are often syndicated by larger media outlets which causes fringe web communities to have a much broader reach than they ever could have before \cite{zannettou2018origins}. 
 
 
-\section{Analysis}
 
-\section{Contributions}
 
-\section{Findings}
+\section{Phase I - Manual Approach}
+Our research and methodology can be split up into a manual process (phase I), and a semiautonomous process (phase II). In the manual approach, we created a data set of popular news articles and then attempted to trace them back to the original publisher. Once we identified the propagation path, we attempted to analyze how various article features changed over time.    
+
+\subsection{Dataset Creation}
+We started by collecting a diverse range of articles from a number of different news sources. As seen in Appendix \ref{appendix:a}, we selected five articles from each news source and recorded each articles' associated comment count. These articles were picked out between October 5 2019 and October 8 2019. We looked for articles that were published in the past two weeks. We picked media outlets that tended to be biased either towards the political left or right as defined by the chart in Appendix \ref{appendix:b}. The reason we did not pick any mainstream, unbiased news outlets (New York Times, Washington Post, Economist, etc.) is because these news sources typically do their due diligence in ensuring that the news that they are publishing is true, and the public typically trusts these sources \cite{kearney2017trusting}. It is also worth noting that we did not consider any articles that were about, or mentioned, President Donald Trump, as these could possibly skew results. Aside from that, we did not consider the actual content of the article when picking articles for the initial dataset. 
+
+\subsection{Case Study: Chinese Gold}
+One of the first articles that stuck out to us from the initial dataset was the article from the Daily Mail titled \textit{Thirteen and a half tonnes of gold worth up to £520million is found in a corrupt Chinese official’s home and £30BILLION in suspected bribe money in his bank account}. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=10cm]{paper/img/chinese-gold-dailymail.png}
+    \caption {First Article About Chinese Gold That We Found}
+    \label{fig:chinesegolddailymail}
+\end{figure}
+
+\subsubsection{Propagation Analysis}
+The reason this article jumped out at us is because the number of comments for this article was much higher than any article in the dataset. Once we identified this specific story, we decided to try to trace it back to its original source. The process of trying to trace an article back to its origin is an extremely tedious and time consuming task. This is because there is no systematic approach already out there that can help us gather the information that we needed.  The data used to build the propagation path for the Chinese Gold Story can be found in Appendix \ref{appendix:c}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=16.5cm]{paper/img/chinese-gold-timeline.png}
+    \caption {Timeline of Chinese Gold Story}
+    \label{fig:chinesegoldtimeline}
+\end{figure}
+
+As it turned out, the original content for the news story was actually a twitter post. What was fascinating was that none of the articles actually attributed that Twitter was the first platform where the content for the story appeared; many of the news outlets did link to the Twitter post, but not once did any of the news sources explicitly say "this content was originally posted on Twitter by a user." It is also important to notice the time delays between when the story was first posted on Twitter, and when it was picked up by mainstream media. 
+
+\subsubsection{Article Feature Analysis}
+Besides just looking at how the article traveled through space and time as it was syndicated, we were interested in looking at how the articles' properties changed over time.
+\begin{figure}[h]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=7cm]{paper/img/chinese-gold-article-len.png}
+  \captionof{figure}{Article Length Over Time}
+  \label{chinesegoldarticlelen}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=7cm]{paper/img/chinese-gold-title-len.png}
+  \captionof{figure}{Title Length Over Time}
+  \label{chinesegoldtitlelen}
+\end{minipage}
+\end{figure}
+
+
+\subsection{Findings}
+We found that
+
+\subsubsection{Different Types of Syndication}
+Top-down and bottom-up
+
+\section{Phase II - Semiautonomous Approach }
+In the semiautomated approach, we wanted to see if our findings from phase I would still hold true against a larger data set. We automated the process of tracing the propagation path and conducting analysis on the resulting articles. The resulting methodology from phase II is the main contribution of this work.
+
+
+
+
+
+
+
+
 
 \section{Future Work}
 
-\section{Conclusion}
+\section{Discussion and Conclusion}
 
 
+%References
 \newpage
 
 \bibliographystyle{unsrt}  
-\bibliography{paper}  %%% Remove comment to use the external .bib file (using bibtex).
-%%% and comment out the ``thebibliography'' section.
+\bibliography{paper} 
 
 
-%%% Comment out this section when you \bibliography{references} is enabled.
+%Appendix
+\newpage
 
+\appendix
+\section{Initial Dataset Used for Phase I Analysis}
+\label{appendix:a}
+\begin{center}
+ \begin{longtable}{| c | m{10cm} | c |} 
+ \hline
+ \multicolumn{1}{|c|}{\textbf{Media Outlet}} &
+ \multicolumn{1}{c|}{\textbf{Article}} &
+ \multicolumn{1}{c|}{\textbf{Comments}}  \\ 
+ \hline\hline
+ Patribotics & Dear Mr. Putin, Let’s Play Chess & 148 \\ 
+ \hline
+  Patribotics & Wikileaks is Connected to Russia – Despite Their Claims & 42 \\ 
+ \hline
+  Patribotics & Planespotting: Michael Cohen’s Amazing Journey & 49 \\ 
+ \hline
+  Patribotics &Putin’s Hacker, Wikileaks Host Pyotr Chayanov, Hacked America’s Vote System And the DNC & 11 \\ 
+ \hline
+  Patribotics &Wikileaks Hands “Keys” to Putin’s Russian Hacker – Readers, Leakers Tracked & 19 \\ 
+ \hline
+ InfoWars & De-Dollarization: Europe Joins The Party
+ & 6 \\
+ \hline
+  InfoWars & Unemployment Falls to Lowest Level Since 1969
+ & 13 \\
+ \hline
+  InfoWars & China Unveils ‘doomsday Bomb’ While U.s. Military Concentrates on “diversity” & 83 \\
+ \hline
+  InfoWars & ‘no Precedent in Human Experience’: Study Finds Nuclear War Between India and Pakistan Could Leave 125 Million Dead & 6 \\
+ \hline
+  InfoWars & China Reveals New Photos of Strange Substance From Dark Side of Moon
+ & 26 \\
+ \hline
+  Daily Caller & Iranian Foreign Minister Uses Instagram To Resign & 22 \\
+ \hline
+ Daily Caller & Israel Holding Early Elections As Bribery Allegations Engulf Netanyahu & 12  \\
+ \hline
+  Daily Caller & Turkey’s President Arrests More Than 100 People For Connections To Failed 2016 Coup & 4  \\
+ \hline
+  Daily Caller & Saudi Crown Prince Fires Entertainment Chief Because Of Tightly Clad Female Circus Performers & 4  \\
+ \hline
+  Daily Caller & Hong Kong Police Unload Live Rounds On Protesters, Shoot 18-Year-Old: Report
+ & 23  \\
+ \hline
+  Daily KOS & How to Support the Hong Kong Protesters & 2 \\
+ \hline
+  Daily KOS & Who knew? Ukraine-gate is actually a Rick Perry crime spree! & 76 \\
+ \hline
+  Daily KOS & NYT: Second Ukraine-related whistleblower may soon come forward & 96 \\
+ \hline
+  Daily KOS & Have we learned nothing about wars in the Middle East? & 119 \\
+ \hline
+  Daily KOS & Open thread for night owls: 'Itching for a War' with Iran & 93 \\
+ \hline
+ Daily Mail & Russia is helping China build a new missile attack warning system in 'response' to US plans to deploy missiles in Asia & 44 \\
+ \hline
+  Daily Mail & British sausage makers claim nation's bangers are under threat from pork shortage in China that has seen prices rise by 45 per cent & 184 \\
+ \hline
+  Daily Mail & Thousands of pro-democracy activists rally in Hong Kong ahead of four days of protests to overshadow anniversary celebrations in Beijing & 0 \\
+ \hline
+  Daily Mail & Thirteen and a half tonnes of gold worth up to £520million is found in a corrupt Chinese official's home and £30BILLION in suspected bribe money in his bank account & 451 \\
+ \hline
+  Daily Mail & 'Most-wanted' Chinese fugitive, 63, hides in a cliff-side cave for 17 YEARS after escaping from prison & 6 \\
+ \hline
+ The Washington Times & Man pulls gun in road rage incident over Elizabeth Warren sticker, police say & 2  \\
+ \hline
+  The Washington Times & Man pulls gun in road rage incident over Elizabeth Warren sticker, police say & 5  \\
+ \hline
+  The Washington Times & Man pulls gun in road rage incident over Elizabeth Warren sticker, police say & 124  \\
+ \hline
+  The Washington Times & FBI runs Russian-language Facebook ads asking for help neutralizing 'hostile foreign intelligence' & 1  \\
+ \hline
+  The Washington Times & FBI runs Russian-language Facebook ads asking for help neutralizing 'hostile foreign intelligence' & 0  \\
+ \hline
+ Mother Jones & It’s No Coincidence That the Top Presidential Candidates Are All So Old & 6  \\
+ \hline
+  Mother Jones & Columnist at the Center of Ukraine Scandal Joins Fox News & 5  \\
+ \hline
+  Mother Jones & Microsoft Says Iranian Hackers Are Targeting a 2020 Presidential Campaign & 9  \\
+ \hline
+ 
+ \hline
+ \multicolumn{1}{|c|}{\textbf{Media Outlet}} &
+ \multicolumn{1}{c|}{\textbf{Article}} &
+ \multicolumn{1}{c|}{\textbf{Comments}}  \\ 
+ \hline\hline
+ 
+ \hline
+  Mother Jones & Researchers Assembled over 100 Voting Machines. Hackers Broke Into Every Single One.
+ & 7  \\
+ \hline
+  Mother Jones & The Biden Campaign Is Demanding That TV Execs Stop Booking Guiliani & 69  \\
+ \hline
+ Reason & Supreme Court Will Finally Hear Arguments Over Federal LGBT Discrimination Protections & 100 \\
+ \hline
+  Reason & China Banned South Park After the Show Made Fun of Chinese Censorship & 105\\
+ \hline
+  Reason & The NBA Cares More About Making Money in Mainland China Than Supporting Freedom in Hong Kong & 94 \\
+ \hline
+  Reason & The U.K. Must Ban Pointy Knives, Says Church of England & 76 \\
+ \hline
+ Reason & The New York Times Says 'Free Speech Is Killing Us.' But Violent Crime Is Lower Than Ever. & 120 \\ [1ex] 
+ \hline
+\end{longtable}
+\end{center}
+
+\newpage
+\section{Media Bias Diagram}
+\label{appendix:b}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=15cm]{paper/img/media-bias.jpg}
+    \caption* {Media Bias Diagram}
+    \label{fig:mediabias}
+\end{figure}
+
+\newpage
+\section{Chinese Gold Story Dataset}
+\label{appendix:c}
+\begin{center}
+ \begin{tabular}{| c | m{10cm} | c |} 
+ \hline
+ \multicolumn{1}{|c|}{\textbf{Media Outlet}} &
+ \multicolumn{1}{c|}{\textbf{Article Title}} &
+ \multicolumn{1}{c|}{\textbf{Date of Publication}}  \\ 
+ \hline\hline
+ Twitter & N/A (Twitter post by user @h1300062810) & . 09-24-2019 10:09 \\ 
+ \hline
+  PowerApple & Secretary of Haikou copied 13.5 tons of cash, booked 268 billion in gold (translated)  & 09-26-2019 08:08 \\ 
+ \hline
+  CrimeRussia & Chinese official hides 13 tons of gold in basement & 09-26-2019 09:50 \\ 
+ \hline
+  MenaFN & 13.5 Tons Of Gold Found In Chinese Ex Mayors Basement & 09-26-2019 18:20 \\ 
+ \hline
+  Novinite & 13 Tonnes of Gold Found in the Basement of Former Chinese Mayor & 09-27-2019 13:49 \\ 
+ \hline
+ RT & 13.5 TONS of gold found piled in Chinese ex-governor’s home & 10-01-2019 13:37 \\
+ \hline
+  Daily Star & 13.5 tons of gold and \$37billion cash found during police raid on mayor in China & 10-01-2019 18:21 \\
+ \hline
+  Daily Mail & Thirteen and a half tonnes of gold worth up to £520million is found in a corrupt Chinese official's home and £30BILLION in suspected bribe money in his bank account & 10-02-2019 04:54 \\
+ \hline
+  Mirror & Corrupt Chinese official found with £520million worth of gold bullion in home & 10-03-2019 02:01 \\
+ \hline
+\end{tabular}
+\end{center}
 
 
 \end{document}
