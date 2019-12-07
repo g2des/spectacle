@@ -31,12 +31,15 @@ Zhiwei Jin, Juan Cao, Yu-Gang Jiang, and Yongdong Zhang.
 \newblock In {\em 2014 IEEE International Conference on Data Mining}, pages
   230--239. IEEE, 2014.
 
+<<<<<<< HEAD
+=======
 \bibitem{wang2009propagation}
 Youzhong Wang, Daniel Zeng, Xiaolong Zheng, and Feiyue Wang.
 \newblock Propagation of online news: dynamic patterns.
 \newblock In {\em 2009 IEEE International Conference on Intelligence and
   Security Informatics}, pages 257--259. IEEE, 2009.
 
+>>>>>>> 57b8af96696143d7366140bbaa540a4470c8fee7
 \bibitem{zannettou2018origins}
 Savvas Zannettou, Tristan Caulfield, Jeremy Blackburn, Emiliano De~Cristofaro,
   Michael Sirivianos, Gianluca Stringhini, and Guillermo Suarez-Tangil.
