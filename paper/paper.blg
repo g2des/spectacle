@@ -1,8 +1,9 @@
-This is BibTeX, Version 0.99d (TeX Live 2019)
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: paper.aux
 The style file: unsrt.bst
 Database file #1: paper.bib
+<<<<<<< HEAD
 You've used 6 entries,
             1791 wiz_defined-function locations,
             478 strings with 4900 characters,
@@ -37,10 +38,52 @@ stack$ -- 0
 substring$ -- 83
 swap$ -- 27
 text.length$ -- 2
+=======
+You've used 9 entries,
+            1791 wiz_defined-function locations,
+            495 strings with 5362 characters,
+and the built_in function-call counts, 2363 in all, are:
+= -- 215
+> -- 105
+< -- 3
++ -- 39
+- -- 30
+* -- 143
+:= -- 364
+add.period$ -- 30
+call.type$ -- 9
+change.case$ -- 9
+chr.to.int$ -- 0
+cite$ -- 9
+duplicate$ -- 117
+empty$ -- 228
+format.name$ -- 30
+if$ -- 544
+int.to.chr$ -- 0
+int.to.str$ -- 9
+missing$ -- 9
+newline$ -- 48
+num.names$ -- 9
+pop$ -- 34
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 62
+stack$ -- 0
+substring$ -- 140
+swap$ -- 40
+text.length$ -- 3
+>>>>>>> 57b8af96696143d7366140bbaa540a4470c8fee7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
+<<<<<<< HEAD
 while$ -- 14
 width$ -- 7
 write$ -- 68
+=======
+while$ -- 22
+width$ -- 10
+write$ -- 101
+>>>>>>> 57b8af96696143d7366140bbaa540a4470c8fee7

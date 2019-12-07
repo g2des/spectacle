@@ -17,6 +17,7 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{wrapfig}
+\usepackage[dvipsnames]{xcolor}
 \title{A Systematic Approach to Analyzing Syndication of Viral News Stories}
 
 
@@ -212,7 +213,35 @@ Top-down and bottom-up
 \section{Phase II - Semiautonomous Approach }
 In the semiautomated approach, we wanted to see if our findings from phase I would still hold true against a larger data set. We automated the process of tracing the propagation path and conducting analysis on the resulting articles. The resulting methodology from phase II is the main contribution of this work.
 
+The approach can be broadly categorized into two stages.
+\begin{enumerate}
+  \item 
+  \textit{Dataset Generation}: As a part of this data generation we identify the  viral news articles, scrape for articles that are similar to it and gather metadata on these set articles. The raw data is passed through machine learning models to group them as relevant articles and discard non relevant articles.
+   \item
+   \textit{Analysis}: Numerous data visualization methods were applied based on the findings of phase I. These included time series analysis and histograms on certain features.
+\end{enumerate}
 
+\subsection{Dataset Creation}
+\subsubsection{Identification of Viral News Article}
+Like in phase I, we did not use articles published by unbiased media sources and steered clear of stories related to Donald Trump. An article with more than \emph{ten thousand reactions}\footnote{reaction is the sum of likes, comments and shares} on facebook was quantified as a viral news article. The articles selected in the end were a heterogenous mixture of local and international events. These new articles were used to manually build\emph{url.csv} dataset. This dataset consists of a single feature, url pointing to the article.
+
+\subsubsection{Scraping similar news articles}
+Once a url.csv is generated, remanining articles are fetched manually of the internet. Currently, we use google news api and newsapi to query for the relevant articles.
+The urls in \emph{url.csv} were used to generate a temporary dataset which consists of the url of the story along with the title of the story. The title is  
+
+\subsubsection{Building Dataset}
+\colorbox{BurntOrange}{Add code snippet here}
+
+\subsection{Data Clustering}
+\subsubsection{Similarity Score}
+\subparagraph{Stemming}
+\subparagraph{TF-IDF}
+\subparagraph{Cosine Distance}
+\subsubsection{Hierarchical Clustering}
+\subsection{Data Analysis}
+\subsection{Case Study : The Arkansas Story}
+\subsubsection{Overview}
+\subsubsection{Findings}
 
 
 
