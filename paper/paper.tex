@@ -73,34 +73,58 @@ In this work, we present a novel, semiautonomous methodology for analyzing syndi
 \end{abstract}
 \keywords{Fake news \and News propagation \and News syndication}
 \newpage
-
 \tableofcontents
-
 \newpage
-% keywords can be removed
-
-
-
-
 \section{Introduction}
+Misinformation, disinformation, and fake news have become a common occurrence in our interconnected society. The idea of intentionally spreading fake news to sway public opinion, also known as disinformation, was brought to light by the U.S. Intelligence Committee's report on Russian meddling in the 2016 U.S. presidential election \cite{stelzenmuller2017impact}. Misinformation, or the unintentional spread of inaccurate news, has also become ubiquitous thanks to social media, which allows unreliable news to be proliferated quickly and without any verification \cite{pourghomi2017stop}. The use of a combination of misinformation and disinformation by nation states, non-state actors, and other politically motivated groups has become so prevalent that it has affected over seventy countries \cite{alba_satariano_2019}. This problem has gotten so extreme that the integrity of the U.S. election system, and even the fundamental democratic ideals of the U.S., have been called into question by some \cite{mueller2019report}. Due to the global nature of this problem, over fifty countries have begun to implement measures to combat misinformation and disinformation \cite{poynter}. The measures implemented by these countries span from laws and legislation, to creating task forces and launching official investigations to try to weed disinformation \cite{poynter}. Besides nation states trying to tackle this behemoth of a problem, many researchers and academics have also been trying to implement various methods to try to detect and classify misinformation, disinformation, and fake news. This area of research has become commonly known as \textit{fake news detection} \cite{zhang2019overview}. 
 
-News are everywhere- television, newspapers, social media. We consume it whether we like it or not. But the question is, how do we know which news are true, and which are false? 
+\subsection{Problem Statement}
+There has already been many different approaches proposed to detecting and classifying fake news. Many proposed solutions have mostly relied on various machine learning techniques, such as using deep neural networks, or recurrent learning models \cite{shu2017fake}. These models for the most part work by training the model on a variety of features ranging anywhere from text-based features, to network features that show how the article has been spread through space and time \cite{shu2017fake}. The problem with these models is that they rely on a lot of information to be fed into them, which take a long time to extracted. Also, many of these approaches have only been tested on a few media outlets and social media platforms and could not work on a global scale.
 
-Fake news has been a real issue since the spark of social media, especially in the recent years, with its spike coming during the 2016 U.S. presidential election. In fact, a study from Ohio State University shows that fake news had a significant impact on the results of the elections. The researchers found a correlation between the amount of Obama voters who believed fake news about Clinton and the amount of them who chose to vote for Trump. At that time, the media was swarmed with fake news, and one could hardly blame people who couldn't distinguish them from real news.
+One of the largest problems that has not be widely discussed or researched is that many media outlets simply take news articles from other news sources and republish them as their own. This process is known as news syndication. This is an extremely dangerous practice that can lead to the problem of fake news being further exacerbated. There are certain types of news syndication which are generally safe and do not lead to misinformation being spread. As we discuss later, other types of news syndication are dangerous and could easily be exploited by nation states seeking to carry out a disinformation campaign against another country. 
 
-But what exactly is fake news? According to Wikipedia, "fake news is a form of news consisting of deliberate disinformation or hoaxes spread via traditional news media (print and broadcast) or online social media". In addition to this definition, fake news may also include clickbait stories, propaganda, satire, biased news, or even sometimes just bad journalism.
+\subsection{Objectives}
+Our first objective of this work is to build a system that given a viral article, could find related articles that were either syndicated off of the original article, or articles that were syndicated by the original article. This allows us to achieve our second objective of building a propagation path which shows where the original article was published, and by who. The third objective of this work is to then analyze the propagation path of the article and see what features change over time, how they change over time, and identify any patterns. 
 
-These days, anyone can publish content on the internet, whether it is on a website, a blog, or a social media profile, and potentially reach large audiences. The fact that people nowadays rely on the internet to consume news doesn't make this problem any easier to solve.
-Fake news is very profitable for the publisher, as viral stories generate large amounts of traffic, thus increasing advertisement revenue. For that reason, fake news are widely common around the internet. 
-Another motive to publish fake news is to promote a political agenda. Fake political news stories are meant to persuade consumers to accept a biased of false beliefs (like the fake news regarding Hillary Clinton during the 2016 U.S. presidential election). This is the main reason detecting fake news is such a challenge. These false stories were created to sound true and interesting.
+The last two objectives of this work were not able to be accomplished in this research, but we hope they will be completed in future work. For one, we hope to eventually fully automate this process by incorporating various models for clickbait title identification, so that the clickbait model could feed our system articles to be analyzed. Our second future objective is to eventually incorporate existing fake news detection models so that once our system identifies the original article from the propagation path, it can then be classified as fake news or not. In the end, we hope to be able to provide the media consumer with a message stating where the article originated from, and if its veracity can be verified or not. 
 
-A different variation of fake news is syndication. A website can take a real news story, and change it a bit, so it will fit that website's beliefs. A news story can be syndicated in various ways- changing the title, adding interpretations that aren't necessarily true, and much more. A popular form of syndication is news stories that are posted by local newspapers and websites, and as they get viral, these stories get picked up by bigger and more popular news websites. On the way from the local news source to the national (or international) news website, the story can get syndicated. Sometimes, it's not necessarily on purpose, but it happens due to the lack of due diligence by the mainstream media.
+\subsection{Contributions}
+We make a number of contributions throughout this work. First, we present out initial manual methodology which outlines how we first identified viral articles, how we traced them back to their origin, and the findings from out analysis. From this analysis, we present and define two different types of news syndication: top-down and bottom-up. We then present a refined, semiautonomous methodology which is derived from our initial methodology, but with a few revisions. This methodology, given a viral news story and a couple related articles, will automatically scrape the web and identify articles within a set time window which were either syndicated from the original set of articles fed to it, or articles that the original set of articles syndicated. We use a combination and similarity score and key words that eventually feed into a dendrogram which clusters similar articles together. We then take this clustered data set and build a timeline which allows the original article to be identified. We also are able to perform a wide range of analysis on various article features and categorize how certain features change over time. This analysis then allows us to identify patterns about syndicated articles and eventually draw conclusions.
 
-One can try and detect fake news by checking the source of the story, read beyond the title (which is intended to attract users and thus contains more interesting and controversial topics), try to trace the article back to the original source, or even make sure the article is not a satire by any chance.
-Even though it's possible, doing so is not an easy task, and that is why there has been a lot of work put into automating this process. A step towards this, is detecting and analyzing the syndication of viral news stories. That is, how stories change through time and the difference between articles regrading the same stories but posted in different websites.
+\subsection{Definitions}
+The realm of fake news detection has become inundated with a variety of various terms that are used interchangeably depending on the article. It is important to define these various terms in order to avoid ambiguity and misunderstandings. The following definitions are taken from the Ethical Journalism Network \cite{ethicaljournalismnetwork}:  
 
-The thing is, that identifying news propagation path is tedious, too. To identify the propagation path of a given article, one would have to dive deep into the results of Google search, manually identify the original source of the story, and look through many news websites and see the differences between the ways each website covers the same story. That's why we decided to try and automate this process using machine learning techniques and data analysis.
+\begin{itemize}
+    \item \textbf{Fake News}: \textit{"Fake news is information deliberately fabricated and published with the intention to deceive and mislead others into believing falsehoods or doubting verifiable facts"}
+    \item \textbf{Disinformation}: \textit{Information that is false and deliberately created to harm a person, social group, organization or country}.
+    \item \textbf{Misinformation}: \textit{Information that is false, but not created with the intention of causing harm}.
+    \item \textbf{Malinformation}: \textit{Information that is based on reality, used to inflict harm on a person, organization or country}.
+\end{itemize}
 
+The main difference between these definitions is the intent and what it is being used for. These terms may be used interchangeably in this work. This is because our work does not intend to differentiate between the intent of the news. Our work focuses on building a methodology that is able to semiautonomously trace back an article to its origin and analyze how article features change over time. Future work involves trying to classify news as fake or not, but that involves using already developed models for classification. Not even these models attempt to differentiate between different intentions. Therefore, although misinformation, disinformation, and fake news do technically have different meanings, they can be used interchangeably in this line of work since most research on fake news detection just attempts to classify news as accurate or inaccurate, not to try to determine the intent behind the article. 
+
+\subsection{Limitations}
+As stated before, this work does not attempt to make a determination of whether the content of an article is true or false. Instead, this research is primarily focused on presenting a semiautonomous methodology which can be used to identify the propagation path of a viral article, as well as conduct analysis on article features. In the future, we hope to full automate this methodology, as well as incorporate existing fake news classification models in order to actually make a determinate about content accuracy. However, for now, the scope of this work is strictly limited to semi autonomously identifying the propagation path of an article, as well as conducting time series analysis on articles features. 
+
+
+
+
+
+
+%Fake news has been a real issue since the spark of social media, especially in the recent years, with its spike coming during the 2016 U.S. presidential election. In fact, a study from Ohio State University shows that fake news had a significant impact on the results of the elections. The researchers found a correlation between the amount of Obama voters who believed fake news about Clinton and the amount of them who chose to vote for Trump. At that time, the media was swarmed with fake news, and one could hardly blame people who couldn't distinguish them from real news.
+
+%But what exactly is fake news? According to Wikipedia, "fake news is a form of news consisting of deliberate disinformation or hoaxes spread via traditional news media (print and broadcast) or online social media". In addition to this definition, fake news may also include clickbait stories, propaganda, satire, biased news, or even sometimes just bad journalism.
+
+%These days, anyone can publish content on the internet, whether it is on a website, a blog, or a social media profile, and potentially reach large audiences. The fact that people nowadays rely on the internet to consume news doesn't make this problem any easier to solve.
+%Fake news is very profitable for the publisher, as viral stories generate large amounts of traffic, thus increasing advertisement revenue. For that reason, fake news are widely common around the internet. 
+%Another motive to publish fake news is to promote a political agenda. Fake political news stories are meant to persuade consumers to accept a biased of false beliefs (like the fake news regarding Hillary Clinton during the 2016 U.S. presidential election). This is the main reason detecting fake news is such a challenge. These false stories were created to sound true and interesting.
+
+%A different variation of fake news is syndication. A website can take a real news story, and change it a bit, so it will fit that website's beliefs. A news story can be syndicated in various ways- changing the title, adding interpretations that aren't necessarily true, and much more. A popular form of syndication is news stories that are posted by local newspapers and websites, and as they get viral, these stories get picked up by bigger and more popular news websites. On the way from the local news source to the national (or international) news website, the story can get syndicated. Sometimes, it's not necessarily on purpose, but it happens due to the lack of due diligence by the mainstream media.
+
+%One can try and detect fake news by checking the source of the story, read beyond the title (which is intended to attract users and thus contains more interesting and controversial topics), try to trace the article back to the original source, or even make sure the article is not a satire by any chance.
+%Even though it's possible, doing so is not an easy task, and that is why there has been a lot of work put into automating this process. A step towards this, is detecting and analyzing the syndication of viral news stories. That is, how stories change through time and the difference between articles regrading the same stories but posted in different websites.
+
+%The thing is, that identifying news propagation path is tedious, too. To identify the propagation path of a given article, one would have to dive deep into the results of Google search, manually identify the original source of the story, and look through many news websites and see the differences between the ways each website covers the same story. That's why we decided to try and automate this process using machine learning techniques and data analysis.
 \section{Background}
 The field of misinformation and fake news has become widely researched by academics ever since the Russian misinformation campaign against the 2016 United States presidential election came to light\cite{stelzenmuller2017impact}. The most straightforward approach to detecting fake news is applying various machine learning techniques, and this is what many researchers have focused on thus far.
 
@@ -109,7 +133,6 @@ The field of misinformation and fake news has become widely researched by academ
 \subsection{Open Issues in Fake News Detection}
 Shu et al. closes by giving an overview of many of the various open areas of research in this field, as well as proposing some future research ideas. Shu et al. outlines four future research directions: data-oriented, feature-oriented, model-oriented, and application-oriented. Within the area of data-oriented research, Shu et al. brings forward a couple of issues that need to be addressed. For one, there is no large, encompassing fake news data set which can be used as a benchmark to facilitate future research \cite{shu2017fake}. In fact, this was such a large problem that in 2018, Shu et al. published another work detailing their methodology for building a large scale, open source, data set consisting of fake news, which is now available on Github \cite{shu2018fakenewsnet}. Another idea that Shu et al. proposes for future research within the data-oriented direction is early fake news detection \cite{shu2017fake}. Many of the current state-of-the-art fake news detection methods rely on data that needs to be accumulated over time and information that is not readily available when news is just starting to go viral \cite{liu2018early}. Shu et al. suggests creating a system that provides fake news alerts during the dissemination process so that misinformation can be flagged before it is viewed by a large audience. Another suggestion that is made is to look at social media posts made within some time delay of the original posts as a means of verifying the veracity of the post \cite{shu2017fake}.  
 %\label{sec:headings}
-
 
 \section{Related Work}
 There has been work done on early fake news detection by analyzing propagation paths and time series, as well as analyzing the dynamics of news syndication. Most of this work, however, has been limited in scope in terms of the domains that it covers, as well as the type of media being analyzed. For example, past research has focused on a either a few social media platforms, a specific media outlet, or a single country \cite{liu2018early},\cite{jin2014news}, \cite{wang2009propagation}. The research that has spanned across multiple different domains of news (social media, various news outlets, etc.) has been limited in scope when considering the type of media that is being analyzed \cite{zannettou2018origins}. There has been little work, if any, done specifically on the syndication of viral news and trying to automatically analyze and track back a viral news story to its original publisher.   
@@ -145,7 +168,7 @@ One of the first articles that stuck out to us from the initial dataset was the 
 \end{figure}
 
 \subsubsection{Propagation Analysis}
-The reason this article jumped out at us is because the number of comments for this article was much higher than any article in the dataset. Once we identified this specific story, we decided to try to trace it back to its original source. The process of trying to trace an article back to its origin is an extremely tedious and time consuming task. This is because there is no systematic approach already out there that can help us gather the information that we needed.  The data used to build the propagation path for the Chinese Gold Story can be found in Appendix \ref{appendix:c}
+The reason this article jumped out at us is because the number of comments for this article was much higher than any article in the dataset. Once we identified this specific story, we decided to try to trace it back to its original source. The process of trying to trace an article back to its origin is an extremely tedious and time consuming task. This is because there is no systematic approach already out there that can help us gather the information that we needed.  The data used to build the propagation path for the Chinese Gold Story can be found in Appendix \ref{appendix:c}.
 
 \begin{figure}[h]
     \centering
@@ -154,7 +177,7 @@ The reason this article jumped out at us is because the number of comments for t
     \label{fig:chinesegoldtimeline}
 \end{figure}
 
-As it turned out, the original content for the news story was actually a twitter post. What was fascinating was that none of the articles actually attributed that Twitter was the first platform where the content for the story appeared; many of the news outlets did link to the Twitter post, but not once did any of the news sources explicitly say "this content was originally posted on Twitter by a user." It is also important to notice the time delays between when the story was first posted on Twitter, and when it was picked up by mainstream media. 
+As it turned out, the original content for the news story was actually a twitter post. What was fascinating was that none of the articles actually attributed that Twitter was the first platform where the content for the story appeared; many of the news outlets did link to the Twitter post, but not once did any of the news sources explicitly say "this content was originally posted on Twitter by a user." It is also important to notice the time delays between when the story was first posted on Twitter, and when it was picked up by mainstream media. The initial twitter post was made on September 24. It took about two days for international news outlets (PowerApple, CrimeRussina, MenaFN, Novinite) to pick up this news story. It took about seven days for mainstream news outlets (RT, Daily Star, Daily Mail, Mirror) to pick up this news articles. It is important to note these time delays as it can be used to categorize bottom-up syndication, which we will define later in this work. 
 
 \subsubsection{Article Feature Analysis}
 Besides just looking at how the article traveled through space and time as it was syndicated, we were interested in looking at how the articles' properties changed over time.
@@ -174,6 +197,11 @@ Besides just looking at how the article traveled through space and time as it wa
 \end{minipage}
 \end{figure}
 
+
+From Figures \ref{chinesegoldarticlelen} and \ref{chinesegoldtitlelen}, we can see that the general trend for both the article length and title length was that as the article was syndicated, both features became longer. By actually analyzing the content of the article, it seems as though as each article was syndicated by another news outlet, they made more inferences about the article. For example, the original Twitter post just showed a video, and short description about the video. By the time Daily Mail posted their version of the article, they were making inferences about the official's total net worth, his assets, as well as general claims about anti corruption in China. None of these topics were ever discussed by the original Twitter post. The Daily Mail just assumed these as fact and wrapped everything up into one story.   
+
+\subsection{Case Study: University of Virginia}
+Once we found the story about the Chinese gold story, we wanted to see if other similar articles exhibited the same properties and characteristics. We started looking for articles which origin could be traced back to either a social media post, or a local news media outlet. One of the first articles that we identified was the story titled \texit{University of Virginia cancels 21-gun salute from Veterans Day ceremony} on Fox News. 
 
 \subsection{Findings}
 We found that
@@ -354,5 +382,37 @@ In the semiautomated approach, we wanted to see if our findings from phase I wou
 \end{tabular}
 \end{center}
 
+\newpage
+\section{University of Virginia Story Dataset}
+\label{appendix:d}
+\begin{center}
+ \begin{tabular}{| c | m{10cm} | c |} 
+ \hline
+ \multicolumn{1}{|c|}{\textbf{Media Outlet}} &
+ \multicolumn{1}{c|}{\textbf{Article Title}} &
+ \multicolumn{1}{c|}{\textbf{Date of Publication}}  \\ 
+ \hline\hline
+  The Daily Progress & Opinion/Letter: UVa should rethink Veterans Day decision  & 11-06-2019 09:26 \\ 
+ \hline
+  WHSV & VA reinstates 21-gun salute on Veterans Day after wide-scale backlash & 11-08-2019 14:11 \\ 
+ \hline
+  The College Fix & Citing ‘gun violence,’ UVA cancels 21-gun salute portion of Veterans Day ceremony & 11-11-2019 05:05 \\ 
+ \hline
+  The Christian Perspective & University of Virginia Cancels 21-Gun Salute to Appease Snowflake Students & 11-11-2019 13:15 \\ 
+ \hline
+ Washington Examiner & University of Virginia ending 21-gun salute over potential 'panic' by students & 11-11-2019 13:20 \\
+ \hline
+ The Hill & University of Virginia cancels 21-gun salute to veterans over concern it might 'cause a panic' & 11-11-2019 18:41 \\
+ \hline
+ Fox News & University of Virginia cancels 21-gun salute from Veterans Day ceremony & 11-11-2019 20:42 \\
+ \hline
+  RT & University of Virginia excoriated for ditching Veterans Day 21-gun salute ‘because gun violence’ & 11-11-2019 21:59\\
+ \hline
+  Daily Caller & Students Force University Of Virginia To End 21-Gun Salute On Veterans Day & 11-11-2019 22:14 \\
+ \hline
+
+
+\end{tabular}
+\end{center}
 
 \end{document}
