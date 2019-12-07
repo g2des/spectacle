@@ -195,10 +195,11 @@ The approach can be broadly categorized into two stages.
 
 \subsection{Dataset Creation}
 \subsubsection{Identification of Viral News Article}
-Like in phase I, we did not use articles published by unbiased media sources and steered clear of stories related to Donald Trump. An article with more than \emph{ten thousand reactions}\footnote{reaction is the sum of likes, comments and shares} on facebook was quantified as a viral news article. The articles selected in the end were a heterogenous mixture of local and international events. These new articles were used to manually build\emph{url.csv} dataset. This dataset consists of a single feature, namely the url pointing to the article.
+Like in phase I, we did not use articles published by unbiased media sources and steered clear of stories related to Donald Trump. An article with more than \emph{ten thousand reactions}\footnote{reaction is the sum of likes, comments and shares} on facebook was quantified as a viral news article. The articles selected in the end were a heterogenous mixture of local and international events. These new articles were used to manually build\emph{url.csv} dataset. This dataset consists of a single feature, url pointing to the article.
 
 \subsubsection{Scraping similar news articles}
-
+Once a url.csv is generated, remanining articles are fetched manually of the internet. Currently, we use google news api and newsapi to query for the relevant articles.
+The urls in \emph{url.csv} were used to generate a temporary dataset which consists of the url of the story along with the title of the story. The title is  
 
 \subsubsection{Building Dataset}
 \colorbox{BurntOrange}{Add code snippet here}
