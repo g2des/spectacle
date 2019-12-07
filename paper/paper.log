@@ -1,8 +1,12 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  5 DEC 2019 01:10
 =======
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.12.7)  7 DEC 2019 12:25
 >>>>>>> 57b8af96696143d7366140bbaa540a4470c8fee7
+=======
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.12.7)  7 DEC 2019 16:03
+>>>>>>> Stashed changes
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -850,23 +854,11 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-
-
-LaTeX Warning: File `paper/img/university.png' not found on input line 69.
-
-
-! Package pdftex.def Error: File `paper/img/university.png' not found: using dr
-aft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.69 ...ics[width=6.5cm]{paper/img/university.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+<img/university.png, id=128, 602.25pt x 602.25pt>
+File: img/university.png Graphic file (type png)
+<use img/university.png>
+Package pdftex.def Info: img/university.png  used on input line 69.
+(pdftex.def)             Requested size: 184.9429pt x 184.94035pt.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 72.
 LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <12> not available
@@ -914,10 +906,11 @@ PDF statistics:
  25737 words of extra memory for PDF output out of 29859 (max. 10000000)
 =======
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 75.
-[1
+ [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./paper.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/university.png>] (./
+paper.toc)
 \tf@toc=\write4
 \openout4 = `paper.toc'.
 
@@ -1053,8 +1046,8 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 \f@nch@orh ->\scshape \footnotesize \headeright 
                                                 \strut 
-l.200 \subsubsection
-                    {Scraping similar news articles}
+l.201 
+      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1062,14 +1055,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [6]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 4156) has occurred while \output is active []
 
 
 ! Undefined control sequence.
 \f@nch@orh ->\scshape \footnotesize \headeright 
                                                 \strut 
-l.209 \subparagraph
-                   {TF-IDF}
+l.207 \paragraph
+                *{Stop Words}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1077,18 +1070,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [7]
-! Undefined control sequence.
-\f@nch@orh ->\scshape \footnotesize \headeright 
-                                                \strut 
-l.229 \newpage
-              
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
-[8] (./paper.bbl)
+LaTeX Warning: Citation `saif2014stopwords' on page 8 undefined on input line 2
+08.
+
+
+LaTeX Warning: Citation `stanfordnlp2019Dec' on page 8 undefined on input line 
+208.
+
 ! Undefined control sequence.
 \f@nch@orh ->\scshape \footnotesize \headeright 
                                                 \strut 
@@ -1100,14 +1089,26 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+[8] (./paper.bbl)
+! Undefined control sequence.
+\f@nch@orh ->\scshape \footnotesize \headeright 
+                                                \strut 
+l.243 \newpage
+              
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 [9]
-Underfull \vbox (badness 10000) detected at line 289
+Underfull \vbox (badness 10000) detected at line 296
  []
 
 ! Undefined control sequence.
 \f@nch@orh ->\scshape \footnotesize \headeright 
                                                 \strut 
-l.341 \end{longtable}
+l.348 \end{longtable}
                      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1119,7 +1120,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 \f@nch@orh ->\scshape \footnotesize \headeright 
                                                 \strut 
-l.344 \newpage
+l.351 \newpage
               
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1129,7 +1130,7 @@ and I'll forget about whatever was undefined.
 
 [11]
 
-LaTeX Warning: File `paper/img/media-bias.jpg' not found on input line 349.
+LaTeX Warning: File `paper/img/media-bias.jpg' not found on input line 356.
 
 
 ! Package pdftex.def Error: File `paper/img/media-bias.jpg' not found: using dr
@@ -1139,7 +1140,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.349 ...ics[width=15cm]{paper/img/media-bias.jpg}
+l.356 ...ics[width=15cm]{paper/img/media-bias.jpg}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1147,7 +1148,7 @@ If that doesn't work, type  X <return>  to quit.
 ! Undefined control sequence.
 \f@nch@orh ->\scshape \footnotesize \headeright 
                                                 \strut 
-l.354 \newpage
+l.361 \newpage
               
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1156,12 +1157,12 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 386.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 393.
 
 ! Undefined control sequence.
 \f@nch@orh ->\scshape \footnotesize \headeright 
                                                 \strut 
-l.386 \end{document}
+l.393 \end{document}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1170,20 +1171,24 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 386.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 393.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 386.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 386.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 393.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 393.
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 434679814FA81E79A84FCF4E6BA60567;2157.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 386.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 393.
  ) 
 Here is how much of TeX's memory you used:
- 10212 strings out of 494880
- 154352 string characters out of 6179601
+ 10217 strings out of 494880
+ 154474 string characters out of 6179601
  389351 words of memory out of 5000000
- 13135 multiletter control sequences out of 15000+600000
- 63619 words of font info for 166 fonts, out of 8000000 for 9000
+ 13141 multiletter control sequences out of 15000+600000
+ 63394 words of font info for 164 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  36i,11n,45p,1548b,498s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/gaurav/.te
@@ -1192,11 +1197,18 @@ ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
 s/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (13 pages, 107465 bytes).
+Output written on paper.pdf (13 pages, 206611 bytes).
 PDF statistics:
+<<<<<<< Updated upstream
  332 PDF objects out of 1000 (max. 8388607)
  284 compressed objects within 3 object streams
  68 named destinations out of 1000 (max. 500000)
  27897 words of extra memory for PDF output out of 29859 (max. 10000000)
 >>>>>>> 57b8af96696143d7366140bbaa540a4470c8fee7
+=======
+ 335 PDF objects out of 1000 (max. 8388607)
+ 285 compressed objects within 3 object streams
+ 69 named destinations out of 1000 (max. 500000)
+ 27902 words of extra memory for PDF output out of 29859 (max. 10000000)
+>>>>>>> Stashed changes
 
